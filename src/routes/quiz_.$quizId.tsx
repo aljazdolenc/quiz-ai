@@ -56,7 +56,7 @@ function QuizResultsPage() {
     const currentQuestion = quiz.questions?.[index];
 
     return (
-        <div className="container mx-auto flex flex-col gap-8 w-full pt-10 pb-6">
+        <div className="container mx-auto flex flex-col gap-8 w-full pt-6 @sm:pt-10 pb-6">
             {analyzing
                 ? <ProcessingQuiz/>
                 : (<>
