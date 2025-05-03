@@ -27,14 +27,12 @@ export function QuizLandingPage() {
         try {
             setLoading(true);
             const quiz = await createQuiz(chatInput);
-            console.log('navigatin to /quiz/' + quiz.id + '')
             await navigate({to: '/quiz/' + quiz.id});
+            setLoading(false);
         } catch (e) {
             console.error('Failed to create quiz', e);
             toast.error('Failed to create quiz', {closeButton: true});
         }
-
-        setLoading(false);
     }
 
     return (
@@ -45,8 +43,7 @@ export function QuizLandingPage() {
                     What do you want to learn today?
                 </h1>
 
-                <form className="max-w-xl mx-auto mb-10 animate-fade-in relative"
-                      onSubmit={(e) => submit(e)}>
+                <form className="max-w-xl mx-auto mb-10 animate-fade-in relative" onSubmit={submit}>
                     <Input
                         className="pr-12 py-6 text-base shadow-md hover:shadow transition-shadow"
                         placeholder="I want to learn about..."

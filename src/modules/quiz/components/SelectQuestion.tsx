@@ -17,14 +17,21 @@ export function SelectQuestion({question, answeredChanged, previewMode}: SelectQ
     const [selectedId, setSelectedId] = useState(question.selectedId);
 
     useEffect(() => {
-        if (!selectedId || selectedId === question.selectedId) {
-            question.selectedId = undefined;
-        } else {
-            question.selectedId = selectedId;
-        }
+        setSelectedId(question.selectedId);
+    }, [question]);
 
+    useEffect(() => {
+        question.selectedId = selectedId;
         answeredChanged?.(question.selectedId !== undefined);
     }, [selectedId]);
+
+    const selectOption = (optionId: string) => {
+        if (optionId === selectedId) {
+            setSelectedId(undefined);
+        } else {
+            setSelectedId(optionId);
+        }
+    }
 
     return (
         <Card className="w-full animate-fade-in">
@@ -38,17 +45,17 @@ export function SelectQuestion({question, answeredChanged, previewMode}: SelectQ
                             key={option.id}
                             className={cn(
                                 "flex items-center space-x-3 p-3 rounded-md transition-colors border border-gray-100 cursor-pointer",
+                                previewMode && "pointer-events-none",
                                 previewMode && option.id === correctId && "bg-green-50 border border-green-200",
                                 previewMode && option.id === selectedId && selectedId !== correctId && "bg-red-50 border border-red-200",
                                 !previewMode && "hover:bg-muted",
                             )}
-                            onClick={() => !previewMode && setSelectedId(option.id)}
+                            onClick={() => !previewMode && selectOption(option.id)}
                         >
                             <Checkbox
                                 id={`${question.id}-${optionIndex}`}
                                 checked={!previewMode ? option.id === selectedId : option.id === selectedId || option.id === correctId}
-                                onCheckedChange={() => setSelectedId(option.id !== selectedId ? option.id : undefined)}
-                                disabled={previewMode}
+                                onCheckedChange={() => selectOption(option.id)}
                                 className={cn(
                                     previewMode && option.id === correctId && "bg-green-700! border-green-700!",
                                     previewMode && option.id === selectedId && selectedId !== correctId  && "bg-red-700! border-red-700!"

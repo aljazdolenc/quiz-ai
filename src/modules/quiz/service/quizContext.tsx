@@ -54,12 +54,10 @@ export const QuizProvider = ({children}: { children: ReactNode }) => {
         }
 
         setRecommendationsLoading(false);
-        console.log('setting loading false');
         return recommendations;
     }
 
     function saveRecommendations(recommendations: QuizDto[] | null) {
-        console.log('save', {recommendations})
         if (!recommendations) {
             localStorage.removeItem(recommendationsKey);
         } else {
@@ -93,7 +91,6 @@ export const QuizProvider = ({children}: { children: ReactNode }) => {
     }
 
     function getQuiz(id: string): QuizDto | undefined {
-        console.log({quizzes})
         return quizzes.find(quiz => quiz.id === id);
     }
 

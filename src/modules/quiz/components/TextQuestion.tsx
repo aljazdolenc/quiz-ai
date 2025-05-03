@@ -17,12 +17,11 @@ export function TextQuestion({question, answeredChanged, previewMode}: TextQuest
     const [text, setText] = useState(answer);
 
     useEffect(() => {
-        if (text) {
-            question.answer = text;
-        } else {
-            question.answer = undefined;
-        }
+        setText(question.answer);
+    }, [question]);
 
+    useEffect(() => {
+        question.answer = text || undefined;
         answeredChanged?.(question.answer !== undefined);
     }, [text]);
 

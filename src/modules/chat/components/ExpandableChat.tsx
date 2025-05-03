@@ -138,7 +138,7 @@ const ExpandableChatToggle: FC<ExpandableChatToggleProps> = ({
         )}
         {...props}
     >
-        {isOpen ? <X className="h-10 w-10"/> : <IconRobotFace className="h-10 w-10"/>}
+        {isOpen ? <X className="size-7"/> : <IconRobotFace className="size-7"/>}
     </Button>
 );
 
