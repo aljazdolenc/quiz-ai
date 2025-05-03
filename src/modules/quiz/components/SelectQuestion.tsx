@@ -34,7 +34,7 @@ export function SelectQuestion({question, answeredChanged, previewMode}: SelectQ
     }
 
     return (
-        <Card className="w-full animate-fade-in">
+        <Card className="w-full animate-fade-in max-sm:gap-2">
             <CardHeader>
                 <CardTitle className="text-xl">{questionText}</CardTitle>
             </CardHeader>
