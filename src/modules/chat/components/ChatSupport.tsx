@@ -77,7 +77,7 @@ export default function ChatSupport() {
                     )}
                 </ChatMessages>
             </ExpandableChatBody>
-            <ExpandableChatFooter className="bg-muted/25">
+            <ExpandableChatFooter className="bg-muted/25 px-2 py-3">
                 <form ref={formRef} className="flex relative gap-2" onSubmit={onSubmit}>
                     <ChatInput
                         value={input}
