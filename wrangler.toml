@@ -1,7 +1,11 @@
+name = "quizai"
 compatibility_date = "2023-10-30"
 pages_build_output_dir = "functions"
 
 [dev]
 port = 4000
 local_protocol = "http"
+
+[pages_build_output]
+dir = "dist"
 
