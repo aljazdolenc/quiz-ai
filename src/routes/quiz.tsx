@@ -1,4 +1,4 @@
-import {createFileRoute, useNavigate} from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router'
 import {type FormEvent, useState} from 'react';
 import {IconLoader, IconSend} from "@tabler/icons-react";
 import {Input} from "@/shared/ui/input";
@@ -12,7 +12,7 @@ export const Route = createFileRoute('/quiz')({
 })
 
 export function QuizLandingPage() {
-    const navigate = useNavigate({from: '/'});
+    const navigate = Route.useNavigate();
     const [chatInput, setChatInput] = useState("");
     const [loading, setLoading] = useState(false);
     const {createQuiz} = useQuizContext();
@@ -27,7 +27,7 @@ export function QuizLandingPage() {
         try {
             setLoading(true);
             const quiz = await createQuiz(chatInput);
-            await navigate({to: '/quiz/' + quiz.id});
+            await navigate({to: `/quiz/$quizId`, params: {quizId: quiz.id}, search: {index: 0}});
             setLoading(false);
         } catch (e) {
             console.error('Failed to create quiz', e);
