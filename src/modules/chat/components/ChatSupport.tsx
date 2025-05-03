@@ -82,7 +82,7 @@ export default function ChatSupport() {
                     <ChatInput
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        className="min-h-12 bg-background shadow-none"
+                        className="bg-background shadow-none"
                     />
                     <Button
                         className="absolute top-1/2 right-2 transform -translate-y-1/2"
