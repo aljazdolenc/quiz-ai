@@ -71,7 +71,7 @@ export default function ChatSupport() {
 
                     {isGenerating && (
                         <ChatBubble variant="received">
-                            <ChatBubbleAvatar src="" fallback="🤖"/>
+                            <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
                             <ChatBubbleMessage isLoading/>
                         </ChatBubble>
                     )}
