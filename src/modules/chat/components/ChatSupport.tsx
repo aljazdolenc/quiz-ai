@@ -1,6 +1,6 @@
 import {Button} from "@/shared/ui/button";
 import {Send} from "lucide-react";
-import {useEffect, useRef, useState, type FormEvent} from "react";
+import {type FormEvent, useEffect, useRef, useState} from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {ExpandableChat, ExpandableChatBody, ExpandableChatFooter, ExpandableChatHeader} from "./ExpandableChat";
@@ -82,10 +82,10 @@ export default function ChatSupport() {
                     <ChatInput
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        className="min-h-12 bg-background shadow-none "
+                        className="min-h-12 bg-background shadow-none"
                     />
                     <Button
-                        className="absolute top-1/2 right-2 transform  -translate-y-1/2"
+                        className="absolute top-1/2 right-2 transform -translate-y-1/2"
                         type="submit"
                         size="icon"
                         disabled={isLoading || isGenerating || !input}
