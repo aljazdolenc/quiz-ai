@@ -70,7 +70,7 @@ export function SelectQuestion({question, answeredChanged, previewMode}: SelectQ
                     ))}
                 </div>
 
-                {explanation && <QuestionExplanation question={question}/>}
+                {previewMode && explanation && <QuestionExplanation question={question}/>}
             </CardContent>
         </Card>
     )

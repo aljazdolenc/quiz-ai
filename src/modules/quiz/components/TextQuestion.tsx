@@ -42,7 +42,7 @@ export function TextQuestion({question, answeredChanged, previewMode}: TextQuest
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                 />
-                {explanation && <QuestionExplanation question={question}/>}
+                {previewMode && explanation && <QuestionExplanation question={question}/>}
             </CardContent>
         </Card>
     )
