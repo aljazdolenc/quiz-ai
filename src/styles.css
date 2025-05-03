@@ -123,10 +123,9 @@
   html, body {
     height: 100dvh;
     width: 100dvw;
-    overflow: hidden;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-hidden;
   }
 }
