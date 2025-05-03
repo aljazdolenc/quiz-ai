@@ -1,4 +1,4 @@
-import {createFileRoute, redirect} from '@tanstack/react-router'
+import {createFileRoute, Link, redirect} from '@tanstack/react-router'
 import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {QuizHeader} from '@/modules/quiz/components/QuizHeader';
@@ -6,6 +6,8 @@ import {QuizQuestion} from '@/modules/quiz/components/QuizQuestion';
 import type {QuizDto} from "@/modules/quiz/dto/quiz.dto.ts";
 import {ResultsPage} from '@/modules/quiz/components/ScoreCard';
 import {Separator} from "@/shared/ui/separator.tsx";
+import {Button} from "@/shared/ui/button.tsx";
+import {IconChevronRight} from "@tabler/icons-react";
 
 export const Route = createFileRoute('/quiz_/$quizId_/results')({
     component: QuizPage
@@ -46,6 +48,13 @@ function QuizPage() {
                   <QuizQuestion key={i} question={question} previewMode/>
               </div>
             ))}
+
+            <Link to="/quiz" className="w-fit mx-auto">
+                <Button className="w-full sm:w-64 cursor-pointer" size="lg">
+                    Next Quiz
+                    <IconChevronRight className="size-6 ml-1"/>
+                </Button>
+            </Link>
         </div>
     )
 }
