@@ -1,5 +1,5 @@
 import {createFileRoute, useNavigate} from '@tanstack/react-router'
-import {useState, type FormEvent} from 'react';
+import {type FormEvent, useState} from 'react';
 import {IconLoader, IconSend} from "@tabler/icons-react";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
@@ -42,7 +42,7 @@ export function QuizLandingPage() {
             <section className="text-center animate-fade-in md:pt-20 mb-12 md:mb-36">
                 <h1
                     className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent max-w-lg mx-auto">
-                    What do you want to learn?
+                    What do you want to learn today?
                 </h1>
 
                 <form className="max-w-xl mx-auto mb-10 animate-fade-in relative"
