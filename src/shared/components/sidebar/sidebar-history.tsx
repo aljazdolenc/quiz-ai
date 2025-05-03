@@ -31,7 +31,7 @@ export function SidebarHistory({items}: Props) {
             <SidebarMenu>
                 {items.map(item => (
                     <SidebarMenuItem key={item.id}>
-                        <SidebarMenuButton asChild onClick={closeSidebar} className="py-0.5">
+                        <SidebarMenuButton asChild onClick={closeSidebar}>
                             <Link to={item.score !== undefined ? "/quiz/" + item.id + '/results' : "/quiz/" + item.id}>
                                 {item.score !== undefined
                                     ? <IconCircleCheck className="size-8! text-green-500"/>
