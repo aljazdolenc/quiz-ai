@@ -114,12 +114,16 @@
     padding: 0;
     box-sizing: border-box;
 
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+
     @apply border-border outline-ring/50;
   }
 
   html, body {
     height: 100dvh;
     width: 100dvw;
+    overflow: hidden;
   }
 
   body {

@@ -37,10 +37,10 @@ function RootComponent() {
         <>
             <QuizProvider>
                 <SidebarProvider>
-                    <AppSidebar variant="inset"/>
+                    <AppSidebar variant="inset" className="h-[100dvh]"/>
                     <SidebarInset>
                         <SiteHeader/>
-                        <div className="flex flex-1 flex-col items-center">
+                        <div className="flex flex-1 flex-col items-center min-h-0 overflow-y-auto">
                             <div
                                 className="@container/main flex flex-1 flex-col gap-2 w-full max-w-[90%] md:max-w-[80%]">
                                 <Outlet/>
