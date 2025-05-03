@@ -10,6 +10,7 @@ export function createReviewPrompt(quiz: QuizDto) {
     "${ScoreDto.CORRECT}", "${ScoreDto.PARTIAL}" or "${ScoreDto.WRONG}".
     And provide short explanation for each question in second-person tone.
     For minor typos in the main point of the question, use ${ScoreDto.PARTIAL} as a score if the meaning was right.
+    For ${ScoreDto.WRONG} and ${ScoreDto.PARTIAL} answers, provide a short explanation of why the answer was wrong and correct answer.
     
     Questions:
     ${
