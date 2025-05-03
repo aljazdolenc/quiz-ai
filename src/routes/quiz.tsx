@@ -36,8 +36,8 @@ export function QuizLandingPage() {
     }
 
     return (
-        <div className="py-8 md:py-12">
-            <section className="text-center animate-fade-in pt-10 md:pt-20 mb-24 md:mb-36">
+        <div className="py-12">
+            <section className="text-center animate-fade-in pt-16 md:pt-20 mb-32 md:mb-36">
                 <h1
                     className="text-4xl md:text-5xl/14 font-bold mb-12 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent max-w-lg mx-auto">
                     What do you want to learn today?
