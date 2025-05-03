@@ -33,14 +33,14 @@ function QuizResultsPage() {
     }, [quizId]);
 
     const updateIndex = async (index: number) => {
-        await navigate({to: Route.fullPath, search: {index: index.toString()}})
+        await navigate({to: Route.fullPath, search: {index: index}})
     }
 
     const submit = async (quiz: QuizDto) => {
         setAnalyzing(true);
 
         await submitQuiz(quiz);
-        await navigate({to: '/quiz/' + quiz.id + '/results'})
+        await navigate({to: '/quiz/$quizId/results', params: { quizId: quiz.id }})
         setAnalyzing(false);
     }
 

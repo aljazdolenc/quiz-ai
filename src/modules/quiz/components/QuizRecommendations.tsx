@@ -14,7 +14,7 @@ export function QuizRecommendations() {
 
     const openQuiz = async (quiz: QuizDto) => {
         addQuiz(quiz);
-        await navigate({to: '/quiz/' + quiz.id})
+        await navigate({to: '/quiz/$quizId', params: {quizId: quiz.id}, search: {index: 0}})
     }
 
     return (

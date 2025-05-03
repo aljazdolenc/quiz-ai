@@ -17,16 +17,15 @@ function QuizPage() {
     const {getQuiz} = useQuizContext();
 
     const loadQuiz = useCallback(async () => {
-        const quiz = await getQuiz(quizId);
+        const quiz = getQuiz(quizId);
 
         if (!quiz) {
             console.error(`Quiz ${quizId} not found`);
             throw redirect({to: '/not-found'});
         }
 
-        console.log('Quiz loaded', quiz);
         setQuiz(quiz);
-    }, quizId);
+    }, [quizId]);
 
     useEffect(() => {
         loadQuiz();

@@ -7,7 +7,7 @@ type DataContextType = {
     recommendations: QuizDto[];
     recommendationsLoading: boolean;
     getQuiz: (id: string) => QuizDto | undefined;
-    submitQuiz: (quiz: QuizDto) => void;
+    submitQuiz: (quiz: QuizDto) => Promise<QuizDto>;
     createQuiz: (prompt: string) => Promise<QuizDto>;
     addQuiz: (quiz: QuizDto) => void;
 };
