@@ -1,0 +1,74 @@
+import {createFileRoute, useNavigate} from '@tanstack/react-router'
+import {useState, type FormEvent} from 'react';
+import {IconLoader, IconSend} from "@tabler/icons-react";
+import {Input} from "@/shared/ui/input";
+import {Button} from "@/shared/ui/button";
+import {QuizRecommendations} from "@/modules/quiz/components/QuizRecommendations.tsx";
+import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import {toast} from "sonner";
+
+export const Route = createFileRoute('/quiz')({
+    component: QuizLandingPage,
+})
+
+export function QuizLandingPage() {
+    const navigate = useNavigate({from: '/'});
+    const [chatInput, setChatInput] = useState("");
+    const [loading, setLoading] = useState(false);
+    const {createQuiz} = useQuizContext();
+
+    const submit = async (e: FormEvent) => {
+        e.preventDefault();
+
+        if (!chatInput.trim()) {
+            return;
+        }
+
+        try {
+            setLoading(true);
+            const quiz = await createQuiz(chatInput);
+            console.log('navigatin to /quiz/' + quiz.id + '')
+            await navigate({to: '/quiz/' + quiz.id});
+        } catch (e) {
+            console.error('Failed to create quiz', e);
+            toast.error('Failed to create quiz', {closeButton: true});
+        }
+
+        setLoading(false);
+    }
+
+    return (
+        <div className="py-8 md:py-12">
+            <section className="text-center animate-fade-in md:pt-20 mb-12 md:mb-36">
+                <h1
+                    className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent max-w-lg mx-auto">
+                    What do you want to learn?
+                </h1>
+
+                <form className="max-w-xl mx-auto mb-10 animate-fade-in relative"
+                      onSubmit={(e) => submit(e)}>
+                    <Input
+                        className="pr-12 py-6 text-base shadow-md hover:shadow transition-shadow"
+                        placeholder="I want to learn about..."
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                    />
+                    <Button
+                        className="absolute right-1 top-1/2 -translate-y-1/2 p-2 h-auto"
+                        type="submit"
+                        variant="ghost"
+                        size="icon"
+                        disabled={!chatInput.trim()}
+                    >
+                        {loading
+                            ? <IconLoader className="h-5 w-5 animate-spin text-blue-500"/>
+                            : <IconSend className="h-5 w-5 text-blue-500"/>
+                        }
+                    </Button>
+                </form>
+            </section>
+
+            <QuizRecommendations/>
+        </div>
+    )
+}

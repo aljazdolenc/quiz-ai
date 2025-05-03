@@ -1,0 +1,47 @@
+import {type ComponentProps} from "react";
+import {SidebarHistory} from "@/shared/components/sidebar/sidebar-history.tsx";
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar
+} from "../../ui/sidebar.tsx";
+import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import {Link} from "@tanstack/react-router";
+
+export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
+    const {quizzes} = useQuizContext();
+    const {setOpenMobile, isMobile} = useSidebar();
+
+    const closeSidebar = () => {
+        if (isMobile) {
+            setOpenMobile(false);
+        }
+    };
+
+    return (
+        <Sidebar collapsible="offcanvas" {...props}>
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            className="data-[slot=sidebar-menu-button]:!p-1.5"
+                            onClick={closeSidebar}
+                        >
+                            <Link to="/quiz">
+                                <img className="h-8" src="/logo.png" alt="logo"/>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
+            <SidebarContent>
+                <SidebarHistory items={quizzes}/>
+            </SidebarContent>
+        </Sidebar>
+    )
+}

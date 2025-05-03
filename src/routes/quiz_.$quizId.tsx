@@ -1,0 +1,90 @@
+import {createFileRoute, redirect, useNavigate} from '@tanstack/react-router'
+import {useCallback, useEffect, useState} from "react";
+import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import type {QuizDto} from "@/modules/quiz/dto/quiz.dto.ts";
+import {QuizHeader} from "@/modules/quiz/components/QuizHeader.tsx";
+import {QuizProgress} from "@/modules/quiz/components/QuizProgress.tsx";
+import {QuizQuestion} from "@/modules/quiz/components/QuizQuestion.tsx";
+import {Button} from "@/shared/ui/button.tsx";
+import {IconChevronLeft, IconChevronRight, IconStarsFilled} from "@tabler/icons-react";
+import {ProcessingQuiz} from "@/modules/quiz/components/ProcessingQuiz.tsx";
+
+export const Route = createFileRoute('/quiz_/$quizId')({
+    component: QuizResultsPage,
+    validateSearch: (search) => ({
+        index: Number(search?.index ?? 1),
+    }),
+})
+
+function QuizResultsPage() {
+    const navigate = useNavigate({from: Route.fullPath});
+    const {quizId} = Route.useParams();
+    const [quiz, setQuiz] = useState<QuizDto | null>(null);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [analyzing, setAnalyzing] = useState(false);
+    const {index} = Route.useSearch();
+    const {getQuiz, submitQuiz} = useQuizContext();
+
+    const loadQuiz = useCallback(async () => {
+        const quiz = await getQuiz(quizId);
+        console.error(`Quiz ${quizId} not found`);
+        if (!quiz) throw redirect({to: '/not-found'});
+        setQuiz(quiz);
+    }, [quizId]);
+
+    const updateIndex = async (index: number) => {
+        await navigate({to: Route.fullPath, search: {index: index.toString()}})
+    }
+
+    const submit = async (quiz: QuizDto) => {
+        setAnalyzing(true);
+
+        await submitQuiz(quiz);
+        await navigate({to: '/quiz/' + quiz.id + '/results'})
+        setAnalyzing(false);
+    }
+
+    useEffect(() => {
+        updateIndex(0);
+        loadQuiz();
+    }, [quizId]);
+
+    if (!quiz) {
+        return null;
+    }
+
+    const currentQuestion = quiz.questions?.[index];
+
+    return (
+        <div className="container mx-auto flex flex-col gap-8 w-full pt-10 pb-6">
+            {analyzing
+                ? <ProcessingQuiz/>
+                : (<>
+                    <QuizHeader title={quiz.title}>
+                        <QuizProgress currentQuestion={index + 1} totalQuestions={quiz.questions?.length ?? 0}/>
+                    </QuizHeader>
+                    <QuizQuestion question={currentQuestion!} setIsAnswered={setIsAnswered}/>
+                    <div className="flex items-center justify-between w-full mt-0 md:mt-6">
+                        {index !== 0 && (
+                            <Button variant="outline" onClick={() => updateIndex(index - 1)}>
+                                <IconChevronLeft/>
+                                Back
+                            </Button>
+                        )}
+                        {index + 1 === quiz.questions?.length
+                            ? <Button className="ml-auto" onClick={() => submit(quiz)} disabled={!isAnswered}>
+                                Review
+                                <IconStarsFilled/>
+                            </Button>
+                            : <Button className="ml-auto" onClick={() => updateIndex(index + 1)}
+                                      disabled={!isAnswered}>
+                                Next
+                                <IconChevronRight/>
+                            </Button>
+                        }
+                    </div>
+                </>)
+            }
+        </div>
+    );
+}
