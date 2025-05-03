@@ -2,7 +2,7 @@ import {MessageSquare} from "lucide-react";
 import {useNavigate} from "@tanstack/react-router";
 import {Button} from "@/shared/ui/button";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/shared/ui/card.tsx";
-import {useQuizContext} from "../service/quizContext";
+import {useQuizContext} from "@/modules/quiz/hooks/quizContext";
 import {Skeleton} from "@/shared/ui/skeleton.tsx";
 import type {QuizDto} from "@/modules/quiz/dto/quiz.dto.ts";
 import {IconBrain, IconChevronRight, IconClock} from "@tabler/icons-react";

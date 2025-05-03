@@ -1,4 +1,4 @@
-import { ArrowDown } from "lucide-react";
+import {ArrowDown} from "lucide-react";
 import {useAutoScroll} from "@/modules/chat/hooks/useAutoScroll.ts";
 import {Button} from "@/shared/ui/button.tsx";
 import {forwardRef, type HTMLAttributes} from "react";
@@ -18,7 +18,7 @@ const ChatMessages = forwardRef<HTMLDivElement, ChatMessagesProps>(
     return (
       <div className="relative w-full h-full">
         <div
-          className={`flex flex-col w-full h-full p-4 overflow-y-auto ${className}`}
+          className={`flex flex-col w-full h-full p-2 sm:p-4 overflow-y-auto ${className}`}
           ref={scrollRef}
           onWheel={disableAutoScroll}
           onTouchMove={disableAutoScroll}

@@ -3,6 +3,7 @@ import {HttpClient} from "../../../shared/http/http-client.js";
 import {createQuizPrompt} from "../../../domain/quiz/prompts/create-quiz-prompt.js";
 import {AiResponseDto} from "../../../domain/ai/dto/ai-response.dto.js";
 import {uuid} from "../../../shared/util/uuid.js";
+import {QuizDto} from "../../../domain/quiz/dto/quiz.dto.js";
 
 export const onRequestPost: PagesFunction<Env> = async ({request, env}) => {
     const {prompt} = await request.json() as { prompt: string };
@@ -31,7 +32,12 @@ export const onRequestPost: PagesFunction<Env> = async ({request, env}) => {
         }
     )
     const {candidates} = await response.json() as AiResponseDto;
-    const quiz = JSON.parse(candidates[0].content.parts[0].text);
+    const quiz = JSON.parse(candidates[0].content.parts[0].text) as QuizDto;
 
-    return new Response(JSON.stringify({id: uuid(), ...quiz}));
+    return new Response(JSON.stringify({
+        id: uuid(),
+        createdAt: new Date().toISOString(),
+        totalPoints: quiz.questions.length,
+        ...quiz
+    } satisfies QuizDto));
 }

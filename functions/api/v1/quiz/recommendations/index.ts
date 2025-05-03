@@ -38,7 +38,11 @@ export const onRequestPost: PagesFunction<Env> = async ({request, env}) => {
     const {candidates} = await response.json() as AiResponseDto;
     const recommendations = JSON.parse(candidates[0].content.parts[0].text) as QuizDto[];
     console.log(recommendations);
-    recommendations.forEach(quiz => quiz.id = uuid());
+    recommendations.forEach(quiz => {
+        quiz.id = uuid();
+        quiz.createdAt = new Date().toISOString();
+        quiz.totalPoints = quiz.questions.length;
+    });
 
     return new Response(JSON.stringify(recommendations));
 }
@@ -48,6 +52,8 @@ const defaultRecommendations = [
         "id": uuid(),
         "title": "Algebra Basics",
         "description": "Test your fundamental algebra skills.",
+        "createdAt": new Date().toISOString(),
+        "totalPoints": 6,
         "questions": [
             {
                 "type": "select",
@@ -100,6 +106,8 @@ const defaultRecommendations = [
         "id": uuid(),
         "title": "Cell Biology",
         "description": "Explore the fundamental concepts of cells.",
+        "createdAt": new Date().toISOString(),
+        "totalPoints": 6,
         "questions": [
             {
                 "type": "select",
@@ -152,6 +160,8 @@ const defaultRecommendations = [
         "id": uuid(),
         "title": "React Concepts",
         "description": "Check your knowledge of core React concepts.",
+        "createdAt": new Date().toISOString(),
+        "totalPoints": 6,
         "questions": [
             {
                 "type": "select",

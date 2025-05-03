@@ -4,7 +4,7 @@ import {IconLoader, IconSend} from "@tabler/icons-react";
 import {Input} from "@/shared/ui/input";
 import {Button} from "@/shared/ui/button";
 import {QuizRecommendations} from "@/modules/quiz/components/QuizRecommendations.tsx";
-import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import {useQuizContext} from "@/modules/quiz/hooks/quizContext.tsx";
 import {toast} from "sonner";
 
 export const Route = createFileRoute('/quiz')({

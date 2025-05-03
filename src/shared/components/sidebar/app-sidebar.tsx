@@ -3,14 +3,17 @@ import {SidebarHistory} from "@/shared/components/sidebar/sidebar-history.tsx";
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     useSidebar
 } from "../../ui/sidebar.tsx";
-import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import {useQuizContext} from "@/modules/quiz/hooks/quizContext.tsx";
 import {Link} from "@tanstack/react-router";
+import {Button} from "@/shared/ui/button.tsx";
+import {IconChevronRight} from "@tabler/icons-react";
 
 export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
     const {quizzes} = useQuizContext();
@@ -42,6 +45,14 @@ export function AppSidebar({...props}: ComponentProps<typeof Sidebar>) {
             <SidebarContent>
                 <SidebarHistory items={quizzes}/>
             </SidebarContent>
+            <SidebarFooter>
+                <Link to="/quiz" onClick={closeSidebar}>
+                    <Button className="w-full" size="lg">
+                        New Quiz
+                        <IconChevronRight className="size-6 ml-1"/>
+                    </Button>
+                </Link>
+            </SidebarFooter>
         </Sidebar>
     )
 }

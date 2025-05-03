@@ -10,6 +10,7 @@ import {
 } from "../../ui/sidebar.tsx"
 import type {QuizDto} from "@/modules/quiz/dto/quiz.dto.ts";
 import {Link} from "@tanstack/react-router";
+import {IconCircleCheck, IconClock} from "@tabler/icons-react";
 
 interface Props {
     items: QuizDto[]
@@ -30,9 +31,19 @@ export function SidebarHistory({items}: Props) {
             <SidebarMenu>
                 {items.map(item => (
                     <SidebarMenuItem key={item.id}>
-                        <SidebarMenuButton asChild onClick={closeSidebar}>
-                            <Link to={"/quiz/" + item.id + '/results'}>
-                                <span>{item.title}</span>
+                        <SidebarMenuButton asChild onClick={closeSidebar} className="py-0.5">
+                            <Link to={item.score !== undefined ? "/quiz/" + item.id + '/results' : "/quiz/" + item.id}>
+                                {item.score !== undefined
+                                    ? <IconCircleCheck className="size-8! text-green-500"/>
+                                    : <IconClock className="size-7! text-yellow-500"/>
+                                }
+                                <div>
+                                    <div className="font-semibold">{item.title}</div>
+                                    <div className="text-xs text-muted-foreground">
+                                        {new Date(item.createdAt).toDateString()}
+                                        {item.score !== undefined && ` • ${item.score} / ${item.totalPoints}`}
+                                    </div>
+                                </div>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

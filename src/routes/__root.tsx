@@ -3,7 +3,7 @@ import {createRootRouteWithContext, Outlet, Scripts,} from "@tanstack/react-rout
 import appCss from "@/styles.css?url";
 import {Toaster} from "@/shared/ui/sonner.tsx";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
-import {QuizProvider} from "@/modules/quiz/service/quizContext.tsx";
+import {QuizProvider} from "@/modules/quiz/hooks/quizContext.tsx";
 import {SidebarInset, SidebarProvider} from "@/shared/ui/sidebar.tsx";
 import {AppSidebar} from "@/shared/components/sidebar/app-sidebar.tsx";
 import {SiteHeader} from "@/shared/components/SiteHeader.tsx";

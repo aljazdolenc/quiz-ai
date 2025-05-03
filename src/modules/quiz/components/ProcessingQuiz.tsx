@@ -39,7 +39,7 @@ export function ProcessingQuiz() {
 
     return (
         <div className="flex-1 min-h-0 flex flex-col justify-center items-center gap-6">
-            <div className="flex flex-col items-center justify-center gap-6 px-4 pt-12">
+            <div className="flex flex-col items-center justify-center gap-6 px-4 pt-6 sm:pt-12">
                 <h1
                     className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent max-w-lg mx-auto">
                     Analyzing Your Quiz

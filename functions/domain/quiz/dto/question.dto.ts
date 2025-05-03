@@ -1,4 +1,4 @@
-import type {TextQuestionDto} from "@/modules/quiz/dto/text-question.dto.ts";
-import type { SelectQuestionDto } from "./select-question.dto";
+import type {SelectQuestionDto} from "./select-question.dto.js";
+import type {TextQuestionDto} from "./text-question.dto.js";
 
 export type QuestionDto = SelectQuestionDto | TextQuestionDto;

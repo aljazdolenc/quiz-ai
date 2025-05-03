@@ -32,6 +32,21 @@ export const onRequestPost: PagesFunction<Env> = async ({request, env}) => {
         question.score = score.score;
         question.explanation = score.explanation;
     }));
+    const totalScore = scores
+        .map(({score}) => {
+            switch (score) {
+                case ScoreDto.CORRECT:
+                    return 1;
+                case ScoreDto.PARTIAL:
+                    return 0.5;
+                case ScoreDto.WRONG:
+                    return 0;
+            }
+        })
+        .reduce((acc, score) => acc + score, 0);
 
-    return new Response(JSON.stringify(quiz));
+    return new Response(JSON.stringify({
+        ...quiz,
+        score: totalScore
+    }satisfies QuizDto));
 }

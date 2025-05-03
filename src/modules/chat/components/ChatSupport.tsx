@@ -48,7 +48,7 @@ export default function ChatSupport() {
             <ExpandableChatBody>
                 <ChatMessages className="bg-muted/25" ref={messagesRef}>
                     <ChatBubble variant="received">
-                        <ChatBubbleAvatar src="" fallback="🤖"/>
+                        <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
                         <ChatBubbleMessage>
                             Hello! I'm the AI assistant. How can I help you today?
                         </ChatBubbleMessage>
@@ -57,7 +57,7 @@ export default function ChatSupport() {
                     {messages && messages.map((message, index) => (
                         <ChatBubble key={index} variant={message.role == "user" ? "sent" : "received"}>
                             {message.role === "assistant" && (
-                                <ChatBubbleAvatar src="" fallback="🤖"/>
+                                <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
                             )}
                             <ChatBubbleMessage variant={message.role == "user" ? "sent" : "received"}>
                                 {message.content.split("```").map((part: string, index: number) => (

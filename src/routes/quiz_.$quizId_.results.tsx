@@ -1,5 +1,5 @@
 import {createFileRoute, Link, redirect} from '@tanstack/react-router'
-import {useQuizContext} from "@/modules/quiz/service/quizContext.tsx";
+import {useQuizContext} from "@/modules/quiz/hooks/quizContext.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {QuizHeader} from '@/modules/quiz/components/QuizHeader';
 import {QuizQuestion} from '@/modules/quiz/components/QuizQuestion';

@@ -1,4 +1,4 @@
-import { type QuestionDto } from "./question.dto";
+import {type QuestionDto} from "./question.dto";
 
 export interface QuizDto {
   id: string;
@@ -6,6 +6,7 @@ export interface QuizDto {
   description: string;
   totalQuestions: number;
   totalPoints: number;
+  createdAt: string;
   score: number | null;
   questions: QuestionDto[];
 }
