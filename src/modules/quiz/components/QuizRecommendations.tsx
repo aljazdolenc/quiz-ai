@@ -20,7 +20,7 @@ export function QuizRecommendations() {
     return (
         <section className="animate-fade-in">
             <h2 className="text-2xl font-semibold flex items-center mb-4">
-                <MessageSquare className="mr-2 text-blue-500"/> Recommended For You
+                <MessageSquare className="mr-2 text-blue-500"/> Recommendations
             </h2>
             <Separator className="mb-6"/>
             <div className="grid grid-cols-1 @xl/main:grid-cols-2 @3xl/main:grid-cols-3 gap-6">

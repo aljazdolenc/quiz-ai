@@ -37,13 +37,13 @@ export function QuizLandingPage() {
 
     return (
         <div className="py-8 md:py-12">
-            <section className="text-center animate-fade-in md:pt-20 mb-12 md:mb-36">
+            <section className="text-center animate-fade-in pt-10 md:pt-20 mb-12 md:mb-36">
                 <h1
                     className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent max-w-lg mx-auto">
                     What do you want to learn today?
                 </h1>
 
-                <form className="max-w-xl mx-auto mb-10 animate-fade-in relative" onSubmit={submit}>
+                <form className="max-w-xl mx-auto mb-16 md:mb-10 animate-fade-in relative" onSubmit={submit}>
                     <Input
                         className="pr-12 py-6 text-base shadow-md hover:shadow transition-shadow"
                         placeholder="I want to learn about..."
