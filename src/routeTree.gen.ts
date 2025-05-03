@@ -10,30 +10,16 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as QuizImport } from './routes/quiz'
-import { Route as NotFoundImport } from './routes/not-found'
-import { Route as IndexImport } from './routes/index'
-import { Route as QuizQuizIdImport } from './routes/quiz_.$quizId'
-import { Route as QuizQuizIdResultsImport } from './routes/quiz_.$quizId_.results'
+import {Route as rootRoute} from './routes/__root'
+import {Route as QuizImport} from './routes/quiz'
+import {Route as QuizQuizIdImport} from './routes/quiz_.$quizId'
+import {Route as QuizQuizIdResultsImport} from './routes/quiz_.$quizId_.results'
 
 // Create/Update Routes
 
 const QuizRoute = QuizImport.update({
   id: '/quiz',
   path: '/quiz',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const NotFoundRoute = NotFoundImport.update({
-  id: '/not-found',
-  path: '/not-found',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,20 +39,6 @@ const QuizQuizIdResultsRoute = QuizQuizIdResultsImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/not-found': {
-      id: '/not-found'
-      path: '/not-found'
-      fullPath: '/not-found'
-      preLoaderRoute: typeof NotFoundImport
-      parentRoute: typeof rootRoute
-    }
     '/quiz': {
       id: '/quiz'
       path: '/quiz'
@@ -94,16 +66,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/not-found': typeof NotFoundRoute
   '/quiz': typeof QuizRoute
   '/quiz/$quizId': typeof QuizQuizIdRoute
   '/quiz/$quizId/results': typeof QuizQuizIdResultsRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/not-found': typeof NotFoundRoute
   '/quiz': typeof QuizRoute
   '/quiz/$quizId': typeof QuizQuizIdRoute
   '/quiz/$quizId/results': typeof QuizQuizIdResultsRoute
@@ -111,8 +79,6 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/not-found': typeof NotFoundRoute
   '/quiz': typeof QuizRoute
   '/quiz_/$quizId': typeof QuizQuizIdRoute
   '/quiz_/$quizId_/results': typeof QuizQuizIdResultsRoute
@@ -120,35 +86,20 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/not-found'
-    | '/quiz'
-    | '/quiz/$quizId'
-    | '/quiz/$quizId/results'
+  fullPaths: '/quiz' | '/quiz/$quizId' | '/quiz/$quizId/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/not-found' | '/quiz' | '/quiz/$quizId' | '/quiz/$quizId/results'
-  id:
-    | '__root__'
-    | '/'
-    | '/not-found'
-    | '/quiz'
-    | '/quiz_/$quizId'
-    | '/quiz_/$quizId_/results'
+  to: '/quiz' | '/quiz/$quizId' | '/quiz/$quizId/results'
+  id: '__root__' | '/quiz' | '/quiz_/$quizId' | '/quiz_/$quizId_/results'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  NotFoundRoute: typeof NotFoundRoute
   QuizRoute: typeof QuizRoute
   QuizQuizIdRoute: typeof QuizQuizIdRoute
   QuizQuizIdResultsRoute: typeof QuizQuizIdResultsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  NotFoundRoute: NotFoundRoute,
   QuizRoute: QuizRoute,
   QuizQuizIdRoute: QuizQuizIdRoute,
   QuizQuizIdResultsRoute: QuizQuizIdResultsRoute,
@@ -164,18 +115,10 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/not-found",
         "/quiz",
         "/quiz_/$quizId",
         "/quiz_/$quizId_/results"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/not-found": {
-      "filePath": "not-found.tsx"
     },
     "/quiz": {
       "filePath": "quiz.tsx"

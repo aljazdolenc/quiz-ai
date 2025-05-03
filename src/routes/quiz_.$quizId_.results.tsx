@@ -1,4 +1,4 @@
-import {createFileRoute, Link, redirect} from '@tanstack/react-router'
+import {createFileRoute, Link} from '@tanstack/react-router'
 import {useQuizContext} from "@/modules/quiz/hooks/quizContext.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {QuizHeader} from '@/modules/quiz/components/QuizHeader';
@@ -8,12 +8,14 @@ import {ResultsPage} from '@/modules/quiz/components/ScoreCard';
 import {Separator} from "@/shared/ui/separator.tsx";
 import {Button} from "@/shared/ui/button.tsx";
 import {IconChevronRight} from "@tabler/icons-react";
+import {toast} from 'sonner';
 
 export const Route = createFileRoute('/quiz_/$quizId_/results')({
     component: QuizPage
 })
 
 function QuizPage() {
+    const navigate = Route.useNavigate();
     const {quizId} = Route.useParams();
     const [quiz, setQuiz] = useState<QuizDto | null>(null);
     const {getQuiz} = useQuizContext();
@@ -23,10 +25,11 @@ function QuizPage() {
 
         if (!quiz) {
             console.error(`Quiz ${quizId} not found`);
-            throw redirect({to: '/not-found'});
+            await navigate({to: '/quiz'});
+            toast.error('Quiz not found', {closeButton: true, id: 'quiz-not-found'});
+        } else {
+            setQuiz(quiz);
         }
-
-        setQuiz(quiz);
     }, [quizId]);
 
     useEffect(() => {
@@ -42,11 +45,11 @@ function QuizPage() {
             <QuizHeader title={`Results: ${quiz.title}`}/>
             <ResultsPage quiz={quiz}/>
             <Separator/>
-            {quiz.questions!.map((question, i) =>(
-              <div>
-                  <h2 className="font-semibold text-xl mb-4">{i + 1}. Question:</h2>
-                  <QuizQuestion key={i} question={question} previewMode/>
-              </div>
+            {quiz.questions!.map((question, i) => (
+                <div>
+                    <h2 className="font-semibold text-xl mb-4">{i + 1}. Question:</h2>
+                    <QuizQuestion key={i} question={question} previewMode/>
+                </div>
             ))}
 
             <Link to="/quiz" className="w-fit mx-auto">

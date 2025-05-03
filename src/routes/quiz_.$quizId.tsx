@@ -1,4 +1,4 @@
-import {createFileRoute, redirect, useNavigate} from '@tanstack/react-router'
+import {createFileRoute} from '@tanstack/react-router'
 import {useCallback, useEffect, useState} from "react";
 import {useQuizContext} from "@/modules/quiz/hooks/quizContext.tsx";
 import type {QuizDto} from "@/modules/quiz/dto/quiz.dto.ts";
@@ -8,6 +8,7 @@ import {QuizQuestion} from "@/modules/quiz/components/QuizQuestion.tsx";
 import {Button} from "@/shared/ui/button.tsx";
 import {IconChevronLeft, IconChevronRight, IconStarsFilled} from "@tabler/icons-react";
 import {ProcessingQuiz} from "@/modules/quiz/components/ProcessingQuiz.tsx";
+import {toast} from "sonner";
 
 export const Route = createFileRoute('/quiz_/$quizId')({
     component: QuizResultsPage,
@@ -17,19 +18,24 @@ export const Route = createFileRoute('/quiz_/$quizId')({
 })
 
 function QuizResultsPage() {
-    const navigate = useNavigate({from: Route.fullPath});
+    const navigate = Route.useNavigate();
     const {quizId} = Route.useParams();
+    const {index} = Route.useSearch();
     const [quiz, setQuiz] = useState<QuizDto | null>(null);
     const [isAnswered, setIsAnswered] = useState(false);
     const [analyzing, setAnalyzing] = useState(false);
-    const {index} = Route.useSearch();
     const {getQuiz, submitQuiz} = useQuizContext();
 
     const loadQuiz = useCallback(async () => {
-        const quiz = await getQuiz(quizId);
-        console.error(`Quiz ${quizId} not found`);
-        if (!quiz) throw redirect({to: '/not-found'});
-        setQuiz(quiz);
+        const quiz = getQuiz(quizId);
+
+        if (!quiz) {
+            console.error(`Quiz ${quizId} not found`);
+            await navigate({to: '/quiz'});
+            toast.error('Quiz not found', {closeButton: true, id: 'quiz-not-found'});
+        } else {
+            setQuiz(quiz);
+        }
     }, [quizId]);
 
     const updateIndex = async (index: number) => {
@@ -40,7 +46,7 @@ function QuizResultsPage() {
         setAnalyzing(true);
 
         await submitQuiz(quiz);
-        await navigate({to: '/quiz/$quizId/results', params: { quizId: quiz.id }})
+        await navigate({to: '/quiz/$quizId/results', params: {quizId: quiz.id}})
         setAnalyzing(false);
     }
 
