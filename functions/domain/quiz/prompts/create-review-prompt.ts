@@ -9,6 +9,7 @@ export function createReviewPrompt(quiz: QuizDto) {
     You are reviewing a quiz titled: "${quiz.title}". Score each question with 
     "${ScoreDto.CORRECT}", "${ScoreDto.PARTIAL}" or "${ScoreDto.WRONG}".
     And provide short explanation for each question in second-person tone.
+    For minor typos in the main point of the question, use ${ScoreDto.PARTIAL} as a score if the meaning was right.
     
     Questions:
     ${
