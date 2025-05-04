@@ -1,4 +1,4 @@
 export enum QuestionTypeDto {
-    TEXT = "text",
-    SELECT = "select",
+  TEXT = "text",
+  SELECT = "select",
 }

@@ -1,18 +1,20 @@
 "use client"
 
 import * as React from "react"
-import {Slot} from "@radix-ui/react-slot"
-import {cva, type VariantProps} from "class-variance-authority"
-import {PanelLeftIcon} from "lucide-react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+import { PanelLeftIcon } from "lucide-react"
 
-import {useIsMobile} from "@/shared/hooks/use-mobile.ts"
-import {cn} from "@/shared/utils/shadcn.ts"
-import {Button} from "@/shared/ui/button.tsx"
-import {Input} from "@/shared/ui/input.tsx"
-import {Separator} from "@/shared/ui/separator.tsx"
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/shared/ui/sheet.tsx"
-import {Skeleton} from "@/shared/ui/skeleton.tsx"
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/shared/ui/tooltip.tsx"
+import { useIsMobile } from "@/shared/hooks/use-mobile.ts"
+import { cn } from "@/shared/utils/shadcn.ts"
+import { Button } from "@/shared/ui/button.tsx"
+import { Input } from "@/shared/ui/input.tsx"
+import { Separator } from "@/shared/ui/separator.tsx"
+import {
+  Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,
+} from "@/shared/ui/sheet.tsx"
+import { Skeleton } from "@/shared/ui/skeleton.tsx"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/shared/ui/tooltip.tsx"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -386,7 +388,9 @@ function SidebarGroupLabel({
   className,
   asChild = false,
   ...props
-}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean
+}) {
   const Comp = asChild ? Slot : "div"
 
   return (
@@ -407,7 +411,9 @@ function SidebarGroupAction({
   className,
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> & { asChild?: boolean }) {
+}: React.ComponentProps<"button"> & {
+  asChild?: boolean
+}) {
   const Comp = asChild ? Slot : "button"
 
   return (
@@ -558,7 +564,7 @@ function SidebarMenuAction({
         "peer-data-[size=lg]/menu-button:top-2.5",
         "group-data-[collapsible=icon]:hidden",
         showOnHover &&
-          "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
+        "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
         className
       )}
       {...props}

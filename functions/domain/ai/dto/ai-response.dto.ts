@@ -1,9 +1,9 @@
 export interface AiResponseDto {
-    candidates: {
-        content: {
-            parts: {
-                text: string
-            }[]
-        }
-    }[]
+  candidates: {
+    content: {
+      parts: {
+        text: string
+      }[]
+    }
+  }[]
 }

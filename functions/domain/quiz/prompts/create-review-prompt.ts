@@ -1,11 +1,11 @@
-import {QuestionTypeDto} from "../dto/question-type.dto.js";
-import {QuizDto} from "../dto/quiz.dto.js";
-import {SelectQuestionDto} from "../dto/select-question.dto.js";
-import {TextQuestionDto} from "../dto/text-question.dto.js";
-import {ScoreDto} from "../dto/score.dto.js";
+import { QuestionTypeDto } from "../dto/question-type.dto";
+import { QuizDto } from "../dto/quiz.dto";
+import { SelectQuestionDto } from "../dto/select-question.dto";
+import { TextQuestionDto } from "../dto/text-question.dto";
+import { ScoreDto } from "../dto/score.dto";
 
 export function createReviewPrompt(quiz: QuizDto) {
-    return `
+  return `
     You are reviewing a quiz titled: "${quiz.title}". Score each question with 
     "${ScoreDto.CORRECT}", "${ScoreDto.PARTIAL}" or "${ScoreDto.WRONG}".
     And provide short explanation for each question in second-person tone.
@@ -14,13 +14,13 @@ export function createReviewPrompt(quiz: QuizDto) {
     
     Questions:
     ${
-        quiz.questions
-        .map(question => question.type === QuestionTypeDto.SELECT
-            ? mapSelectQuestion(question)
-            : mapTextQuestion(question)
-        ).map((line, i) => `${i + 1}. Question\n${line}`)
-        .join('\n')
-    }
+    quiz.questions
+      .map(question => question.type === QuestionTypeDto.SELECT
+        ? mapSelectQuestion(question)
+        : mapTextQuestion(question)
+      ).map((line, i) => `${i + 1}. Question\n${line}`)
+      .join('\n')
+  }
     
     Respond in JSON format:
     [
@@ -32,11 +32,16 @@ export function createReviewPrompt(quiz: QuizDto) {
     `
 }
 
-function mapSelectQuestion({question, options, correctId, selectedId}: SelectQuestionDto) {
-    const correctOption = options.find(option => option.id === correctId);
-    const selectedOption = options.find(option => option.id === selectedId);
+function mapSelectQuestion({
+  question,
+  options,
+  correctId,
+  selectedId
+}: SelectQuestionDto) {
+  const correctOption = options.find(option => option.id === correctId);
+  const selectedOption = options.find(option => option.id === selectedId);
 
-    return `
+  return `
     Question: ${question}
     UserAnswer: ${selectedOption.value}
     Correct: ${correctOption.value}
@@ -44,7 +49,7 @@ function mapSelectQuestion({question, options, correctId, selectedId}: SelectQue
 }
 
 function mapTextQuestion(question: TextQuestionDto) {
-    return `
+  return `
     Question: ${question.question}
     UserAnswer: ${question.answer}
     `;

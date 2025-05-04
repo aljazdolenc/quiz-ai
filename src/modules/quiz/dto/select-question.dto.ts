@@ -1,6 +1,6 @@
 import type { SelectOptionDto } from "./select-option.dto";
-import type {ScoreDto} from "@/modules/quiz/dto/score.dto.ts";
-import {QuestionTypeDto} from "@/modules/quiz/dto/question-type.dto.ts";
+import type { ScoreDto } from "@/modules/quiz/dto/score.dto.ts";
+import { QuestionTypeDto } from "@/modules/quiz/dto/question-type.dto.ts";
 
 export interface SelectQuestionDto {
   id: string;

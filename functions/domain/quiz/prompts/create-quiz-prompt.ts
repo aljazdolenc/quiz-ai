@@ -1,5 +1,5 @@
 export function createQuizPrompt() {
-    return `
+  return `
     You are generating a quiz.
     User is going to send you a message, about a quiz topic.
     Generate quiz with 6 questions related to the topic.

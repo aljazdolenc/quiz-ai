@@ -1,5 +1,5 @@
-import type {ScoreDto} from "@/modules/quiz/dto/score.dto.ts";
-import {QuestionTypeDto} from "@/modules/quiz/types/types.ts";
+import { ScoreDto } from "./score.dto";
+import { QuestionTypeDto } from "./question-type.dto";
 
 export interface TextQuestionDto {
   id: string;

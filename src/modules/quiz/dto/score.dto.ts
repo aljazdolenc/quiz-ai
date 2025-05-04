@@ -1,5 +1,5 @@
 export enum ScoreDto {
-    CORRECT = "correct",
-    PARTIAL = "partial",
-    WRONG = "wrong",
+  CORRECT = "correct",
+  PARTIAL = "partial",
+  WRONG = "wrong",
 }

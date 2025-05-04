@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 interface ScrollState {
   isAtBottom: boolean;
@@ -8,7 +8,7 @@ interface ScrollState {
 interface UseAutoScrollOptions {
   offset?: number;
   smooth?: boolean;
-  content?: React.ReactNode;
+  content?: ReactNode;
 }
 
 export function useAutoScroll(options: UseAutoScrollOptions = {}) {
@@ -25,9 +25,7 @@ export function useAutoScroll(options: UseAutoScrollOptions = {}) {
   const checkIsAtBottom = useCallback(
     (element: HTMLElement) => {
       const { scrollTop, scrollHeight, clientHeight } = element;
-      const distanceToBottom = Math.abs(
-        scrollHeight - scrollTop - clientHeight,
-      );
+      const distanceToBottom = Math.abs(scrollHeight - scrollTop - clientHeight);
       return distanceToBottom <= offset;
     },
     [offset],

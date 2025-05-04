@@ -10,10 +10,10 @@
 
 // Import Routes
 
-import {Route as rootRoute} from './routes/__root'
-import {Route as QuizImport} from './routes/quiz'
-import {Route as QuizQuizIdImport} from './routes/quiz_.$quizId'
-import {Route as QuizQuizIdResultsImport} from './routes/quiz_.$quizId_.results'
+import { Route as rootRoute } from './routes/__root'
+import { Route as QuizImport } from './routes/quiz'
+import { Route as QuizQuizIdImport } from './routes/quiz_.$quizId'
+import { Route as QuizQuizIdResultsImport } from './routes/quiz_.$quizId_.results'
 
 // Create/Update Routes
 

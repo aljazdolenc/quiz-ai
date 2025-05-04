@@ -1,7 +1,7 @@
-import {ArrowDown} from "lucide-react";
-import {useAutoScroll} from "@/modules/chat/hooks/useAutoScroll.ts";
-import {Button} from "@/shared/ui/button.tsx";
-import {forwardRef, type HTMLAttributes} from "react";
+import { ArrowDown } from "lucide-react";
+import { useAutoScroll } from "@/modules/chat/hooks/useAutoScroll.ts";
+import { Button } from "@/shared/ui/button.tsx";
+import { forwardRef, type HTMLAttributes } from "react";
 
 interface ChatMessagesProps extends HTMLAttributes<HTMLDivElement> {
   smooth?: boolean;
@@ -37,7 +37,7 @@ const ChatMessages = forwardRef<HTMLDivElement, ChatMessagesProps>(
             className="absolute bottom-2 left-1/2 transform -translate-x-1/2 inline-flex rounded-full shadow-md"
             aria-label="Scroll to bottom"
           >
-            <ArrowDown className="size-4" />
+            <ArrowDown className="size-4"/>
           </Button>
         )}
       </div>

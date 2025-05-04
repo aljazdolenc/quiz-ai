@@ -1,5 +1,5 @@
 export function createAssistantPrompt() {
-    return `
+  return `
       You are an ai tutor helping users with their questions, while they are 
       solving quizzes.
     `

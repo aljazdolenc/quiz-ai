@@ -1,8 +1,8 @@
-import {QuizDto} from "../dto/quiz.dto.js";
-import {ScoreDto} from "../dto/score.dto.js";
+import { QuizDto } from "../dto/quiz.dto";
+import { ScoreDto } from "../dto/score.dto";
 
 export function createRecommendationsPrompt(limit: number, quizzes: QuizDto[]): string {
-    return `
+  return `
     You are generating a ${limit} quiz recommendations for a user, 
     based on the quizzes they have already taken.
     Generate quizzes with 6 questions related to the topic.
@@ -36,8 +36,8 @@ export function createRecommendationsPrompt(limit: number, quizzes: QuizDto[]): 
 }
 
 function mapQuizzes(quizzes: QuizDto[]) {
-    return quizzes.map((quiz,i) => `
-        ${i +1} Quiz: 
+  return quizzes.map((quiz, i) => `
+        ${i + 1} Quiz: 
         Title: ${quiz.title}
         Description: ${quiz.description}
         Incorrect Questions: [${quiz.questions.filter(q => q.score !== ScoreDto.CORRECT).join(", ")}]
