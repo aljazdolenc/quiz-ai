@@ -5,9 +5,9 @@ import { Toaster } from "@/shared/ui/sonner.tsx";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { QuizProvider } from "@/modules/quiz/hooks/quizContext.tsx";
 import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar.tsx";
-import { AppSidebar } from "@/shared/components/sidebar/app-sidebar.tsx";
+import { AppSidebar } from "@/shared/components/sidebar/AppSidebar.tsx";
 import { SiteHeader } from "@/shared/components/layout/SiteHeader.tsx";
-import ChatSupport from "@/modules/chat/components/ChatSupport";
+import ChatSupport from "@/modules/chat/components/message/ChatSupport.tsx";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

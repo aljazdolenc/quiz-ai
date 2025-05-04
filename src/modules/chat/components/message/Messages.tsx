@@ -7,7 +7,7 @@ interface ChatMessagesProps extends HTMLAttributes<HTMLDivElement> {
   smooth?: boolean;
 }
 
-const ChatMessages = forwardRef<HTMLDivElement, ChatMessagesProps>(
+const Messages = forwardRef<HTMLDivElement, ChatMessagesProps>(
   ({ className, children, smooth = false, ...props }, _ref) => {
     const { scrollRef, isAtBottom, scrollToBottom, disableAutoScroll } =
       useAutoScroll({
@@ -45,6 +45,6 @@ const ChatMessages = forwardRef<HTMLDivElement, ChatMessagesProps>(
   },
 );
 
-ChatMessages.displayName = "ChatMessages";
+Messages.displayName = "ChatMessages";
 
-export { ChatMessages };
+export { Messages };

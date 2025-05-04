@@ -38,7 +38,7 @@ function QuizResultsPage() {
     }
   }, [quizId]);
 
-  const updateIndex = async (index: number) => {
+  const setIndex = async (index: number) => {
     await navigate({ to: Route.fullPath, search: { index: index } })
   }
 
@@ -50,7 +50,7 @@ function QuizResultsPage() {
   }
 
   useEffect(() => {
-    updateIndex(0);
+    setIndex(0);
     loadQuiz();
   }, [quizId]);
 
@@ -67,32 +67,28 @@ function QuizResultsPage() {
         ? <ProcessingQuiz/>
         : (<>
           <QuizHeader title={quiz.title}>
-            <QuizProgress currentQuestion={index + 1}
-                          totalQuestions={quiz.questions?.length ?? 0}/>
+            <QuizProgress currentQuestion={index + 1} totalQuestions={quiz.questions?.length ?? 0}/>
           </QuizHeader>
-          <QuizQuestion question={currentQuestion!}
-                        setIsAnswered={setIsAnswered}/>
-          <div
-            className="flex items-center justify-between w-full mt-0 md:mt-6">
+          <QuizQuestion question={currentQuestion!} setIsAnswered={setIsAnswered}/>
+          <div className="flex items-center justify-between w-full mt-0 md:mt-6">
             {index !== 0 && (
-              <Button variant="outline"
-                      onClick={() => updateIndex(index - 1)}>
+              <Button variant="outline" onClick={() => setIndex(index - 1)}>
                 <IconChevronLeft/>
                 Back
               </Button>
             )}
             {index + 1 === quiz.questions?.length
-              ? <Button className="ml-auto" onClick={() => submit(quiz)}
-                        disabled={!isAnswered}>
-                Review
-                <IconStarsFilled/>
-              </Button>
-              : <Button className="ml-auto"
-                        onClick={() => updateIndex(index + 1)}
-                        disabled={!isAnswered}>
-                Next
-                <IconChevronRight/>
-              </Button>
+              ? (
+                <Button className="ml-auto" onClick={() => submit(quiz)} disabled={!isAnswered}>
+                  Review
+                  <IconStarsFilled/>
+                </Button>
+              ) : (
+                <Button className="ml-auto" onClick={() => setIndex(index + 1)} disabled={!isAnswered}>
+                  Next
+                  <IconChevronRight/>
+                </Button>
+              )
             }
           </div>
         </>)

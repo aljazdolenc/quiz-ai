@@ -1,5 +1,3 @@
-"use client"
-
 import {
   SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar
 } from "../../ui/sidebar.tsx"

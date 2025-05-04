@@ -87,7 +87,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   }
 
   function addQuiz(quiz: QuizDto) {
-    setQuizzes([...quizzes, quiz]);
+    setQuizzes([quiz, ...quizzes]);
   }
 
   function getQuiz(id: string): QuizDto | undefined {

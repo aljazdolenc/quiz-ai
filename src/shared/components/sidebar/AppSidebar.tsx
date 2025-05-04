@@ -1,5 +1,5 @@
 import { type ComponentProps } from "react";
-import { SidebarHistory } from "@/shared/components/sidebar/sidebar-history.tsx";
+import { SidebarHistory } from "@/shared/components/sidebar/SidebarHistory.tsx";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton,
   SidebarMenuItem, useSidebar

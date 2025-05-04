@@ -1,15 +1,19 @@
-import { Button } from "@/shared/ui/button";
+import { Button } from "@/shared/ui/button.tsx";
 import { Send } from "lucide-react";
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {
-  ExpandableChat, ExpandableChatBody, ExpandableChatFooter, ExpandableChatHeader
-} from "./ExpandableChat";
-import { ChatBubble, ChatBubbleAvatar, ChatBubbleMessage } from "./ChatBubble";
-import { ChatMessages } from "./ChatMessages.tsx";
-import { ChatInput } from "./ChatInput.tsx";
+import { ChatBubble } from "../chat/ChatBubble.tsx";
+import { Messages } from "./Messages.tsx";
+import { ChatInput } from "../chat/ChatInput.tsx";
 import { useChat } from "@/modules/chat/hooks/useChat.tsx";
+import { ExpandableChatHeader } from "@/modules/chat/components/chat/ExpandableChatHeader.tsx";
+import { ExpandableChat } from "@/modules/chat/components/chat/ExpandableChat.tsx";
+import { ExpandableChatBody } from "@/modules/chat/components/chat/ExpandableChatBody.tsx";
+import { ExpandableChatFooter } from "@/modules/chat/components/chat/ExpandableChatFooter.tsx";
+import { MessageAvatar } from "./MessageAvatar.tsx";
+import { Message } from "@/modules/chat/components/message/Mesage.tsx";
+import MessageLoading from "@/modules/chat/components/message/MessageLoading.tsx";
 
 export default function ChatSupport() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -49,38 +53,40 @@ export default function ChatSupport() {
         <p>Ask any question for tutor to answer</p>
       </ExpandableChatHeader>
       <ExpandableChatBody>
-        <ChatMessages className="bg-muted/25" ref={messagesRef}>
+        <Messages className="bg-muted/25" ref={messagesRef}>
           <ChatBubble variant="received">
-            <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
-            <ChatBubbleMessage>
+            <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
+            <Message>
               Hello! I'm the AI assistant. How can I help you today?
-            </ChatBubbleMessage>
+            </Message>
           </ChatBubble>
 
           {messages && messages.map((message, index) => (
             <ChatBubble key={index}
                         variant={message.role == "user" ? "sent" : "received"}>
               {message.role === "assistant" && (
-                <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
+                <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
               )}
-              <ChatBubbleMessage
+              <Message
                 variant={message.role == "user" ? "sent" : "received"}>
                 {message.content.split("```").map((part: string, index: number) => (
                   <Markdown key={index} remarkPlugins={[remarkGfm]}>
                     {part}
                   </Markdown>
                 ))}
-              </ChatBubbleMessage>
+              </Message>
             </ChatBubble>
           ))}
 
           {isGenerating && (
             <ChatBubble variant="received">
-              <ChatBubbleAvatar src="/assistant-avatar.png" fallback="🤖"/>
-              <ChatBubbleMessage isLoading/>
+              <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
+              <Message>
+                  <MessageLoading/>
+              </Message>
             </ChatBubble>
           )}
-        </ChatMessages>
+        </Messages>
       </ExpandableChatBody>
       <ExpandableChatFooter className="bg-muted/25 px-2 py-3">
         <form ref={formRef} className="flex relative gap-2"
