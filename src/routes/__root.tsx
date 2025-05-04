@@ -7,7 +7,7 @@ import { QuizProvider } from "@/modules/quiz/hooks/quizContext.tsx";
 import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar.tsx";
 import { AppSidebar } from "@/shared/components/sidebar/AppSidebar.tsx";
 import { SiteHeader } from "@/shared/components/layout/SiteHeader.tsx";
-import ChatSupport from "@/modules/chat/components/message/ChatSupport.tsx";
+import ChatIcon from "@/modules/chat/components/chat/ChatIcon.tsx";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -55,7 +55,7 @@ function RootComponent() {
       <TanStackRouterDevtools position="bottom-right"/>
       <Scripts/>
       <Toaster richColors position="top-right"/>
-      <ChatSupport/>
+      <ChatIcon/>
     </>
   );
 }

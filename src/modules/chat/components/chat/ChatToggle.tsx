@@ -10,7 +10,7 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   toggleChat: () => void;
 }
 
-export function ExpandableChatToggle({ className, icon, isOpen, toggleChat, ...props }: Props) {
+export function ChatToggle({ className, icon, isOpen, toggleChat, ...props }: Props) {
   return <Button
     variant="default"
     onClick={toggleChat}

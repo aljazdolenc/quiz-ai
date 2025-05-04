@@ -2,7 +2,7 @@ import { type HTMLAttributes, type ReactNode, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/utils/shadcn";
-import { ExpandableChatToggle } from "./ExpandableChatToggle";
+import { ChatToggle } from "./ChatToggle.tsx";
 
 type ChatPosition = "bottom-right" | "bottom-left";
 type ChatSize = "sm" | "md" | "lg" | "xl" | "full";
@@ -36,7 +36,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
 }
 
-export function ExpandableChat({
+export function Chat({
   className,
   position = "bottom-right",
   size = "md",
@@ -71,7 +71,7 @@ export function ExpandableChat({
           <X className="size-7"/>
         </Button>
       </div>
-      <ExpandableChatToggle icon={icon} isOpen={isOpen} toggleChat={toggleChat}/>
+      <ChatToggle icon={icon} isOpen={isOpen} toggleChat={toggleChat}/>
     </div>
   );
 }

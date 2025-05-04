@@ -3,19 +3,19 @@ import { Send } from "lucide-react";
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ChatBubble } from "../chat/ChatBubble.tsx";
-import { Messages } from "./Messages.tsx";
-import { ChatInput } from "../chat/ChatInput.tsx";
+import { MessageBubble } from "../message/MessageBubble.tsx";
+import { Messages } from "../message/Messages.tsx";
+import { ChatInput } from "./ChatInput.tsx";
 import { useChat } from "@/modules/chat/hooks/useChat.tsx";
-import { ExpandableChatHeader } from "@/modules/chat/components/chat/ExpandableChatHeader.tsx";
-import { ExpandableChat } from "@/modules/chat/components/chat/ExpandableChat.tsx";
-import { ExpandableChatBody } from "@/modules/chat/components/chat/ExpandableChatBody.tsx";
-import { ExpandableChatFooter } from "@/modules/chat/components/chat/ExpandableChatFooter.tsx";
-import { MessageAvatar } from "./MessageAvatar.tsx";
+import { ChatHeader } from "@/modules/chat/components/chat/ChatHeader.tsx";
+import { Chat } from "@/modules/chat/components/chat/Chat.tsx";
+import { ChatBody } from "@/modules/chat/components/chat/ChatBody.tsx";
+import { ChatFooter } from "@/modules/chat/components/chat/ChatFooter.tsx";
+import { MessageAvatar } from "../message/MessageAvatar.tsx";
 import { Message } from "@/modules/chat/components/message/Mesage.tsx";
 import MessageLoading from "@/modules/chat/components/message/MessageLoading.tsx";
 
-export default function ChatSupport() {
+export default function ChatIcon() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [input, setInput] = useState("");
   const { messages, sendMessage, isLoading } = useChat();
@@ -46,24 +46,24 @@ export default function ChatSupport() {
   };
 
   return (
-    <ExpandableChat size="md" position="bottom-right">
-      <ExpandableChatHeader
+    <Chat size="md" position="bottom-right">
+      <ChatHeader
         className="bg-muted/60 flex-col text-center justify-center">
         <h1 className="text-xl font-semibold">Tutor AI ✨</h1>
         <p>Ask any question for tutor to answer</p>
-      </ExpandableChatHeader>
-      <ExpandableChatBody>
+      </ChatHeader>
+      <ChatBody>
         <Messages className="bg-muted/25" ref={messagesRef}>
-          <ChatBubble variant="received">
+          <MessageBubble variant="received">
             <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
             <Message>
               Hello! I'm the AI assistant. How can I help you today?
             </Message>
-          </ChatBubble>
+          </MessageBubble>
 
           {messages && messages.map((message, index) => (
-            <ChatBubble key={index}
-                        variant={message.role == "user" ? "sent" : "received"}>
+            <MessageBubble key={index}
+                           variant={message.role == "user" ? "sent" : "received"}>
               {message.role === "assistant" && (
                 <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
               )}
@@ -75,20 +75,20 @@ export default function ChatSupport() {
                   </Markdown>
                 ))}
               </Message>
-            </ChatBubble>
+            </MessageBubble>
           ))}
 
           {isGenerating && (
-            <ChatBubble variant="received">
+            <MessageBubble variant="received">
               <MessageAvatar src="/assistant-avatar.png" fallback="🤖"/>
               <Message>
                   <MessageLoading/>
               </Message>
-            </ChatBubble>
+            </MessageBubble>
           )}
         </Messages>
-      </ExpandableChatBody>
-      <ExpandableChatFooter className="bg-muted/25 px-2 py-3">
+      </ChatBody>
+      <ChatFooter className="bg-muted/25 px-2 py-3">
         <form ref={formRef} className="flex relative gap-2"
               onSubmit={onSubmit}>
           <ChatInput
@@ -105,7 +105,7 @@ export default function ChatSupport() {
             <Send className="size-4"/>
           </Button>
         </form>
-      </ExpandableChatFooter>
-    </ExpandableChat>
+      </ChatFooter>
+    </Chat>
   );
 }

@@ -27,7 +27,7 @@ const chatBubbleVariant = cva(
 interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof chatBubbleVariant> {
 }
 
-export const ChatBubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
+export const MessageBubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
   ({ className, variant, layout, children, ...props }, ref) => (
     <div
       className={cn(
@@ -39,13 +39,10 @@ export const ChatBubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
     >
       {Children.map(children, (child) =>
         isValidElement(child) && typeof child.type !== "string"
-          ? cloneElement(child, {
-            variant,
-            layout,
-          } as ComponentProps<typeof child.type>)
+          ? cloneElement(child, { variant, layout } as ComponentProps<typeof child.type>)
           : child,
       )}
     </div>
   ),
 );
-ChatBubble.displayName = "ChatBubble";
+MessageBubble.displayName = "ChatBubble";
