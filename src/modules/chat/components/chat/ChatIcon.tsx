@@ -47,8 +47,7 @@ export default function ChatIcon() {
 
   return (
     <Chat size="md" position="bottom-right">
-      <ChatHeader
-        className="bg-muted/60 flex-col text-center justify-center">
+      <ChatHeader className="bg-muted/60 flex-col text-center justify-center">
         <h1 className="text-xl font-semibold">Tutor AI ✨</h1>
         <p>Ask any question for tutor to answer</p>
       </ChatHeader>
@@ -89,8 +88,7 @@ export default function ChatIcon() {
         </Messages>
       </ChatBody>
       <ChatFooter className="bg-muted/25 px-2 py-3">
-        <form ref={formRef} className="flex relative gap-2"
-              onSubmit={onSubmit}>
+        <form ref={formRef} className="flex relative gap-2" onSubmit={onSubmit}>
           <ChatInput
             value={input}
             onChange={(e) => setInput(e.target.value)}

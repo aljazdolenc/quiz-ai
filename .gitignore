@@ -5,6 +5,6 @@ dist-ssr
 *.local
 .idea
 .wrangler
-.env*
+.env.local
 .dev.vars
 
