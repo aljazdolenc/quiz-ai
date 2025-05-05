@@ -1,5 +1,3 @@
-Welcome to your new TanStack app! 
-
 # Getting Started
 
 Create following files from examples:
